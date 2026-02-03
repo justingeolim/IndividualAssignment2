@@ -20,8 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             IndividualAssignment2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    AssignmentOutput(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -30,18 +29,72 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun AssignmentOutput(modifier: Modifier = Modifier) {
+
+    //1.Variables & Types
+    val name: String = "Justin"
+    var age = 25
+    val height: Double = 170.0
+    val isBUStudent: Boolean = true
+    val grade: Char = 'A'
+    val course = "CS 501"
+
+    //2.String Interpolation
+    var CourseAndGrade = "Course: $course, Grade: $grade"
+    val NextYearAge = "Next year, age will be ${age + 1}"
+
+    //3.Null Safety
+    var nickname: String? = null
+    val length = nickname?.length
+    val displayNickName = nickname ?: "JustinTime"
+    // This is safe because ?. provides null as length if the string is null – rather than crashing //
+    // ?: uses nickname if it exists, but if it's null, it uses what comes after – "JustinTime"
+    // In both cases, they both allows us to handle null values safely – without any crashes.
+
+    //4.Operators
+    val sum = 8 + 3
+    val comparison = age > 18
+    val logical = isBUStudent && age > 18
+
+    age++
+    age += 2
+    //increment
+
+    val output = """
+        1. Variables & Types
+        Name: $name
+        Age: ${age-3}
+        Height: $height
+        Student: $isBUStudent
+        Grade: $grade
+
+        2. String Interpolation
+        $CourseAndGrade
+        $NextYearAge
+
+        3. Null Safety
+        Nickname length: $length
+        Display Nickname: $displayNickName
+
+        4. Operators 
+        5 + 3 = $sum
+        Age > 18: $comparison
+        Student and adult: $logical
+        Age in 3 years: $age
+    """
+
+    Text(text = output, modifier = modifier)
 }
+
+
+
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun PreviewOutput() {
     IndividualAssignment2Theme {
-        Greeting("Android")
+        AssignmentOutput()
     }
 }
